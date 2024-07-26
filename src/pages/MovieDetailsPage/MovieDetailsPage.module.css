@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    gap: 10px;
+}
+
+.genre_container{
+    display: flex;
+    gap: 15px;
+}
+
+.movie_img{
+    width: 300px;
+}
