@@ -11,3 +11,11 @@
 .movie_img{
     width: 300px;
 }
+
+.none{
+    display: none;
+}
+
+.ok{
+    display: block;
+}

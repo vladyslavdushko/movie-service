@@ -34,3 +34,11 @@ export const getReviews = async (id) =>{
     , options)
     return data
 }
+
+export const searchMovie = async(query) =>{
+  const {data} = await axios.get(
+      `/3/search/movie?query=${query}&include_adult=false&language=en-US`
+    , options
+  )
+  return data
+}

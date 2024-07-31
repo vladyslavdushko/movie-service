@@ -28,12 +28,11 @@ const MovieCast = () => {
     }
   }, [movieId]);
 
-
-
+  console.log(cast);
   return (
     <>
     {loading && <p>Loading...</p>}
-    {error && <NotFoundPage/>}
+    {cast.cast.length === 0 && <p>We don`t have cast for this movie</p>}
       <ul>
         {cast.cast.map((actor) => (
           <li key={actor.id}>

@@ -12,6 +12,7 @@ const MovieReviews = () => {
     const getReviewsById = async(id) =>{
 
       try {
+        setLoading(true)
         const data = await getReviews(id)
         setReviews(data)
       } catch (error) {
@@ -24,10 +25,11 @@ const MovieReviews = () => {
     if (movieId) getReviewsById(movieId)
   },[movieId])
 
-
+  console.log(reviews.results.length);
   return (
     <>
     {loading && <p>Loading...</p>}
+    {reviews.results.length === 0 && <p>We don`t have reviews for this movie</p>}
     {reviews.results.length > 0 && <ul>
       {reviews.results.map(review =>
         <div key={review.id}>
