@@ -29,7 +29,7 @@ const MovieReviews = () => {
   return (
     <>
     {loading && <p>Loading...</p>}
-    {reviews.results.length === 0 && <p>We don`t have reviews for this movie</p>}
+    {!loading && !error && reviews.results.length === 0 && <p>We don`t have reviews for this movie</p>}
     {reviews.results.length > 0 && <ul>
       {reviews.results.map(review =>
         <div key={review.id}>

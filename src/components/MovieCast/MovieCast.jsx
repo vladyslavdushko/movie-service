@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCast } from "../../getMovies/getMovies";
 import { useParams } from "react-router-dom";
-import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import styles from './MovieCast.module.css'
 
 const MovieCast = () => {
@@ -32,7 +31,7 @@ const MovieCast = () => {
   return (
     <>
     {loading && <p>Loading...</p>}
-    {cast.cast.length === 0 && <p>We don`t have cast for this movie</p>}
+    {!loading && !error && cast.cast.length === 0 && <p>We don`t have cast for this movie</p>}
       <ul>
         {cast.cast.map((actor) => (
           <li key={actor.id}>

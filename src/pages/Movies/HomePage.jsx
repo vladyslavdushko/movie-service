@@ -22,7 +22,6 @@ useEffect(() => {
     };
     fetchMovies();
   }, []); 
-console.log(location, 'Homepage');
   return (
     <div>
         <h1>Trending today</h1>
@@ -31,7 +30,7 @@ console.log(location, 'Homepage');
                 {movies.map(movie =>
                     <li key={movie.id}>
                       
-                        <Link to={`/movies/${movie.id}`} state={location}>{movie.title}</Link>
+                        <Link to={`/movies/${movie.id}`} state={location }>{movie.title}</Link>
                     </li>
                 )}
         </ul>
