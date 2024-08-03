@@ -3,7 +3,8 @@ import { FiSearch } from 'react-icons/fi';
 import toast, {Toaster} from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { searchMovie } from '../../getMovies/getMovies';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import MovieList from '../../components/MovieList/MovieList';
 const MoviesPage = () => {
   const [query, setQuery] = useState('');
   const [error, setError] = useState(null);
@@ -71,18 +72,7 @@ const MoviesPage = () => {
       {loader && <p>Loading...</p>}
       {error && <p className={style.error}>{error}</p>}
       {results.length > 0 && (
-        <ul className={style.results}>
-          {results.map((movie) => (
-           <li key={movie.id} className={style.movie_list_item}>
-            <Link to={`/movies/${movie.id}` } state={location}>
-              <div className={style.item_container}>
-                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className={style.movi_poster} />
-                <p className={style.movie_title}>{movie.title}</p>
-                </div>
-            </Link>
-           </li>
-          ))}
-        </ul>
+        <MovieList  results={results}/>
       )}
             <Toaster position="top-right" reverseOrder={false} />
     </div>

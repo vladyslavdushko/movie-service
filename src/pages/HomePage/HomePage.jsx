@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
 import {getTrendingMovies} from '../../getMovies/getMovies'
 // import styles from './Movies.module.css'
-import { Link, useLocation } from "react-router-dom"
+import MovieList from "../../components/MovieList/MovieList"
 const HomePage = () => {
 const [movies, setMovies] = useState([])
 const [loading, setLoading] = useState(false)
-const location = useLocation()
 
 useEffect(() => {
     
@@ -26,15 +25,8 @@ useEffect(() => {
     <div>
         <h1>Trending today</h1>
         {loading && <p>Loading...</p>}
-        <ul>
-                {movies.map(movie =>
-                    <li key={movie.id}>
-                      
-                        <Link to={`/movies/${movie.id}`} state={location }>{movie.title}</Link>
-                    </li>
-                )}
-        </ul>
-    </div>
+        <MovieList  results={movies} />
+    </div> 
   )
 }
 

@@ -29,12 +29,13 @@ const MovieReviews = () => {
   return (
     <>
     {loading && <p>Loading...</p>}
+    {error && <p>Error: {error}</p>}
     {!loading && !error && reviews.results.length === 0 && <p>We don`t have reviews for this movie</p>}
     {reviews.results.length > 0 && <ul>
       {reviews.results.map(review =>
         <div key={review.id}>
           <b>Author: {review.author}</b>
-          <p>Author: {review.content}</p>
+          <p>Content: {review.content}</p>
         </div>
       )}
     </ul>}

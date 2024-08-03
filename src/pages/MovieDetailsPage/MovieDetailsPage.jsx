@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { useParams, Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { getMovieDetails } from "../../getMovies/getMovies";
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo } from "react";
 import styles from './MovieDetailsPage.module.css';
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import clsx from "clsx";
@@ -13,13 +13,12 @@ const MovieDetailsPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const location = useLocation();
-  const backLinkRef = useRef(location.state?.pathname + location.state?.search || '/')
+  const [backLink, setBackLink] = useState(location.state?.pathname + location.state?.search || '/');
 
   useEffect(() => {
     const getDetails = async (id) => {
       try {
         setLoading(true);
-        
         const data = await getMovieDetails(id);
         setDetails(data);
       } catch (error) {
@@ -42,7 +41,7 @@ const MovieDetailsPage = () => {
   return (
     <>
       <button className={clsx(memoizedError ? styles.none : styles.ok)}>
-        <Link to={backLinkRef.current}>Go back</Link>
+        <Link to={backLink}>Go back</Link>
       </button>
       {memoizedLoading && <p>Loading...</p>}
       {memoizedError && <NotFoundPage />}

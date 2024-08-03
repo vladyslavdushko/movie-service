@@ -1,0 +1,59 @@
+ul,ol{
+    list-style: none;
+    padding: 0;
+}
+
+p{
+    margin: 0;
+}
+
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid grey;
+width: fit-content;
+    padding: 2px;
+}
+
+.button{
+    border: none;
+    background-color: transparent;
+
+}
+
+.input{
+    border: none;
+    width: 175px;
+}
+
+.movi_poster{
+    width: 200px;
+    margin: 0;
+    padding: 0;
+}
+
+
+.results{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.item_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    max-width: 200px;
+    min-height: 370px;
+}
+
+.movie_title{
+    margin: 10px auto;
+    text-align: center;
+
+}
