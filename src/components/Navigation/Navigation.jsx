@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import { NavLink } from "react-router-dom"
 
-const Navigations = () => {
+const Navigation = () => {
   return (
     <div>
               <nav className='nav_container'>
@@ -16,4 +16,4 @@ const Navigations = () => {
   )
 }
 
-export default Navigations
+export default Navigation

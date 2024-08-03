@@ -5,6 +5,7 @@ import MovieList from "../../components/MovieList/MovieList"
 const HomePage = () => {
 const [movies, setMovies] = useState([])
 const [loading, setLoading] = useState(false)
+const [error, setError] = useState(null)
 
 useEffect(() => {
     
@@ -14,17 +15,19 @@ useEffect(() => {
         const data = await getTrendingMovies();
         setMovies(data.results);
       } catch (error) {
-        console.error("Error fetching movies:", error);
+        setError(error)
       } finally{
         setLoading(false)
       }
     };
     fetchMovies();
   }, []); 
+
   return (
     <div>
         <h1>Trending today</h1>
         {loading && <p>Loading...</p>}
+        {error && <p>Error: {error}</p>}
         <MovieList  results={movies} />
     </div> 
   )

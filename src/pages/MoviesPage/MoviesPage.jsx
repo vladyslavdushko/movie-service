@@ -3,7 +3,7 @@ import { FiSearch } from 'react-icons/fi';
 import toast, {Toaster} from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { searchMovie } from '../../getMovies/getMovies';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import {  useSearchParams } from 'react-router-dom';
 import MovieList from '../../components/MovieList/MovieList';
 const MoviesPage = () => {
   const [query, setQuery] = useState('');
@@ -13,14 +13,12 @@ const MoviesPage = () => {
   const [params, setParams] = useSearchParams()
   const searchQuery = params.get('query');
 
-  const location = useLocation()
   useEffect(() => {
     if (searchQuery) {
       setQuery(searchQuery); 
       searchMovieByKeyWord(searchQuery);
     }
 
-    setQuery('')
   }, [searchQuery]);
 
   const searchMovieByKeyWord = async (query) => {
@@ -51,7 +49,6 @@ const MoviesPage = () => {
     setParams(params)
     setQuery('');
   };
-  console.log(location, 'MoviePage');
 
   return (
     <div>
