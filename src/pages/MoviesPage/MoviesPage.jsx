@@ -1,27 +1,20 @@
-import style from './MoviesPage.module.css'
+import style from './MoviesPage.module.css';
 import { FiSearch } from 'react-icons/fi';
-import toast, {Toaster} from 'react-hot-toast';
-import { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { useEffect, useState, useCallback } from 'react';
 import { searchMovie } from '../../getMovies/getMovies';
-import {  useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import MovieList from '../../components/MovieList/MovieList';
+
 const MoviesPage = () => {
   const [query, setQuery] = useState('');
   const [error, setError] = useState(null);
   const [loader, setLoader] = useState(false);
   const [results, setResults] = useState([]);
-  const [params, setParams] = useSearchParams()
+  const [params, setParams] = useSearchParams();
   const searchQuery = params.get('query');
 
-  useEffect(() => {
-    if (searchQuery) {
-      setQuery(searchQuery); 
-      searchMovieByKeyWord(searchQuery);
-    }
-
-  }, [searchQuery]);
-
-  const searchMovieByKeyWord = async (query) => {
+  const searchMovieByKeyWord = useCallback(async (query) => {
     try {
       setLoader(true);
       setError(null);
@@ -33,7 +26,14 @@ const MoviesPage = () => {
     } finally {
       setLoader(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery) {
+      setQuery(searchQuery);
+      searchMovieByKeyWord(searchQuery);
+    }
+  }, [searchQuery, searchMovieByKeyWord]);
 
   const handleChange = (e) => {
     setQuery(e.target.value);
@@ -45,9 +45,8 @@ const MoviesPage = () => {
       return toast.error("Please enter a search query.");
     }
     searchMovieByKeyWord(query);
-     params.set('query', query)
-    setParams(params)
-    setQuery('');
+    params.set('query', query);
+    setParams(params);
   };
 
   return (
@@ -63,17 +62,15 @@ const MoviesPage = () => {
           autoFocus
           value={query}
           onChange={handleChange}
-          
         />
       </form>
       {loader && <p>Loading...</p>}
       {error && <p className={style.error}>{error}</p>}
       {results.length > 0 && (
-        <MovieList  results={results}/>
+        <MovieList results={results} />
       )}
-            <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
-    
   );
 };
 
