@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import {getTrendingMovies} from '../../getMovies/getMovies'
-// import styles from './Movies.module.css'
+import styles from './Movies.module.css'
 import MovieList from "../../components/MovieList/MovieList"
+import Loader from "../../components/Loader/Loader"
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage"
 const HomePage = () => {
 const [movies, setMovies] = useState([])
 const [loading, setLoading] = useState(false)
@@ -25,9 +27,11 @@ useEffect(() => {
 
   return (
     <div>
-        <h1>Trending today</h1>
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error}</p>}
+        <h1 className={styles.header}>Trending today</h1>
+        {loading && 
+         <Loader className={styles.loader}/>
+        }
+        {error && <ErrorMessage error={error}/>}
         <MovieList  results={movies} />
     </div> 
   )

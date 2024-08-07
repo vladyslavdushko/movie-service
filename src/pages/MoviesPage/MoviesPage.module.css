@@ -12,8 +12,9 @@ p{
     align-items: center;
     justify-content: center;
     border: 1px solid grey;
-width: fit-content;
+    width: fit-content;
     padding: 2px;
+    margin: 0 auto;
 }
 
 .button{
@@ -55,4 +56,9 @@ width: fit-content;
     margin: 10px auto;
     text-align: center;
 
+}
+
+.header{
+    text-align: center;
+    margin: 20px;
 }

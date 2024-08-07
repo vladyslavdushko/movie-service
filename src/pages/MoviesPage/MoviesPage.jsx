@@ -5,6 +5,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { searchMovie } from '../../getMovies/getMovies';
 import { useSearchParams } from 'react-router-dom';
 import MovieList from '../../components/MovieList/MovieList';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 const MoviesPage = () => {
   const [query, setQuery] = useState('');
@@ -51,6 +53,7 @@ const MoviesPage = () => {
 
   return (
     <div>
+      <h2 className={style.header}>Let`s search movies!</h2>
       <form className={style.form} onSubmit={handleSubmit}>
         <button className={style.button} type="submit">
           <FiSearch size="16px" />
@@ -64,8 +67,8 @@ const MoviesPage = () => {
           onChange={handleChange}
         />
       </form>
-      {loader && <p>Loading...</p>}
-      {error && <p className={style.error}>{error}</p>}
+      {loader && <Loader/>}
+      {error && <ErrorMessage error={error}/>}
       {results.length > 0 && (
         <MovieList results={results} />
       )}

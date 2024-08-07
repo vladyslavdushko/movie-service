@@ -1,6 +1,7 @@
 .container{
     display: flex;
-    gap: 10px;
+    gap: 20px;
+    margin: 0 15px;
 }
 
 .genre_container{
@@ -19,3 +20,43 @@
 .ok{
     display: block;
 }
+
+.additionalInfo{
+    margin: 0 15px;
+}
+
+.movie_title{
+    margin: 10px 0;
+}
+
+.tagline{
+    font-style: italic;
+    color: grey;
+    margin: 10px 0px;
+}
+
+.progressBar {
+    appearance: none;
+    height: 6px;
+    border-radius: 100px;
+      
+    /* Chrome and Safari */
+    &::-webkit-progress-bar {
+      background: white;
+      border-radius: 100px;
+      border: 0.1px solid black;
+    }
+  
+    &::-webkit-progress-value {
+      background-color: #004170;
+      border-top-left-radius: 100px;
+      border-bottom-left-radius: 100px;
+    }
+  
+    /* Firefox */
+    &::-moz-progress-bar {
+        background: white;
+        border-radius: 100px;
+        border: 0.1px solid black;
+    }
+  }

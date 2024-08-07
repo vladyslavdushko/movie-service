@@ -2,3 +2,13 @@
     display: flex;
     gap: 10px;
 }
+.header{
+    text-align: center;
+    margin: 20px;
+}
+
+.loader{
+    margin: 0 auto;
+    color: grey;
+    stroke: grey;
+}

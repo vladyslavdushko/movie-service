@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { getReviews } from "../../getMovies/getMovies"
 import { useParams,  } from "react-router-dom"
+import Loader from "../Loader/Loader"
+import ErrorMessage from "../ErrorMessage/ErrorMessage"
 const MovieReviews = () => {
   const {movieId} = useParams()
   const [reviews, setReviews] = useState({results: []})
@@ -28,8 +30,8 @@ const MovieReviews = () => {
   console.log(reviews.results.length);
   return (
     <>
-    {loading && <p>Loading...</p>}
-    {error && <p>Error: {error}</p>}
+    {loading && <Loader/>}
+    {error && <ErrorMessage error={error}/>}
     {!loading && !error && reviews.results.length === 0 && <p>We don`t have reviews for this movie</p>}
     {reviews.results.length > 0 && <ul>
       {reviews.results.map(review =>

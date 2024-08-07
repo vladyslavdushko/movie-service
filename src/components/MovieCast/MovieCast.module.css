@@ -2,3 +2,20 @@
     width: 150px;
     height: auto;
 }
+
+.swiper_slide{
+    max-width: 150px;
+}
+
+.slideContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: fit-content;
+
+    p{
+        text-align: center;
+    }
+}
