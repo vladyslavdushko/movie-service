@@ -5,12 +5,14 @@ const Navigation = () => {
   return (
     <div>
         <nav className={styles.nav_container}>
-        <NavLink to='/' className={({isActive}) => {
-          return clsx('link', isActive && 'isActive')
-        }}>Home</NavLink>
-        <NavLink to='/movies'  className={({isActive}) => {
-          return clsx('link', isActive && 'isActive')
-        }}>Movies</NavLink>
+        <div className={styles.inner_container}>
+          <NavLink to='/' className={({isActive}) => {
+            return clsx('link', isActive && 'isActive')
+          }}>Home</NavLink>
+          <NavLink to='/movies'  className={({isActive}) => {
+            return clsx('link', isActive && 'isActive')
+          }}>Movies</NavLink>
+        </div>
       </nav>
     </div>
   )

@@ -1,76 +1,84 @@
 import style from './MoviesPage.module.css';
-import { FiSearch } from 'react-icons/fi';
 import toast, { Toaster } from 'react-hot-toast';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { searchMovie } from '../../getMovies/getMovies';
 import { useSearchParams } from 'react-router-dom';
 import MovieList from '../../components/MovieList/MovieList';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import { Form } from '../../components/Form/Form';
 
 const MoviesPage = () => {
-  const [query, setQuery] = useState('');
+  const [params, setParams] = useSearchParams();
+  const initialQuery = params.get('query') || ''; // Отримуємо початковий запит з URL
+  const [query, setQuery] = useState(initialQuery); 
   const [error, setError] = useState(null);
   const [loader, setLoader] = useState(false);
-  const [results, setResults] = useState([]);
-  const [params, setParams] = useSearchParams();
-  const searchQuery = params.get('query');
-
-  const searchMovieByKeyWord = useCallback(async (query) => {
-    try {
-      setLoader(true);
-      setError(null);
-      const data = await searchMovie(query);
-      setResults(data.results);
-    } catch (error) {
-      setError(error.message);
-      toast.error("Error fetching movies");
-    } finally {
-      setLoader(false);
-    }
-  }, []);
+  const [movies, setMovies] = useState([]);
+  const [isEmpty, setIsEmpty] = useState(!initialQuery); 
+  const [isVisible, setIsVisible] = useState(false);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if (searchQuery) {
-      setQuery(searchQuery);
-      searchMovieByKeyWord(searchQuery);
-    }
-  }, [searchQuery, searchMovieByKeyWord]);
+    if (!query) return;
 
-  const handleChange = (e) => {
-    setQuery(e.target.value);
+    const fetchMovies = async () => {
+      setLoader(true);
+      try {
+        const { results, total_pages } = await searchMovie(query, page);
+
+        if (!results.length) {
+          setIsEmpty(true);
+          setIsVisible(false);
+          return;
+        }
+        setMovies(prevMovies => [...prevMovies, ...results]);
+        setIsVisible(page < total_pages);
+    console.log(results.length, 'use effect');
+
+      } catch (error) {
+        setError(error);
+        toast.error("Error fetching movies");
+      } finally {
+        setLoader(false);
+      }
+    };
+
+    fetchMovies();
+  }, [page, query]);
+console.log(query);
+  const onHandleSubmit = value => {
+    setQuery(value);
+    setMovies([]);
+    setPage(1);
+    setIsVisible(false);
+    setIsEmpty(false);
+    setError(null);
+
+    params.set('query', value);
+    params.set('page', page)
+    setParams(params);
+  console.log(movies.length, 'onHandleSubmit');
+
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!query.trim()) {
-      return toast.error("Please enter a search query.");
-    }
-    searchMovieByKeyWord(query);
-    params.set('query', query);
+  const loadMore = () => {
+    setPage(prevPage => prevPage + 1);
+    params.set('page', page + 1);
     setParams(params);
   };
-
+  const slicedMovies = movies.slice(0,19)
   return (
     <div>
       <h2 className={style.header}>Let`s search movies!</h2>
-      <form className={style.form} onSubmit={handleSubmit}>
-        <button className={style.button} type="submit">
-          <FiSearch size="16px" />
+      <Form onSubmit={onHandleSubmit} />
+      {loader && <Loader />}
+      {error && <ErrorMessage error={error} />}
+      {slicedMovies.length > 0 && <MovieList results={movies} />}
+      {isVisible && (
+        <button onClick={loadMore} disabled={loader}>
+          {loader ? 'Loading...' : 'Load more'}
         </button>
-        <input
-          className={style.input}
-          placeholder="What do you want to find?"
-          name="search"
-          autoFocus
-          value={query}
-          onChange={handleChange}
-        />
-      </form>
-      {loader && <Loader/>}
-      {error && <ErrorMessage error={error}/>}
-      {results.length > 0 && (
-        <MovieList results={results} />
       )}
       <Toaster position="top-right" reverseOrder={false} />
     </div>
