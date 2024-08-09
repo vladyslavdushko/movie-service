@@ -26,7 +26,7 @@ useEffect(() => {
   }, []); 
 
   return (
-    <div>
+    <div className="container">
         <h1 className={styles.header}>Trending today</h1>
         {loading && 
          <Loader className={styles.loader}/>

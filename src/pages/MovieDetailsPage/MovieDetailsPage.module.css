@@ -35,6 +35,10 @@
     margin: 10px 0px;
 }
 
+.overview{
+    text-wrap: wrap;
+}
+
 .progressBar {
     appearance: none;
     height: 6px;
@@ -60,3 +64,15 @@
         border: 0.1px solid black;
     }
   }
+
+
+@media( max-width: 768px){
+
+    .container{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+   
+}

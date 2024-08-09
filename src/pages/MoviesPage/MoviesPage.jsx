@@ -7,6 +7,7 @@ import MovieList from '../../components/MovieList/MovieList';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import { Form } from '../../components/Form/Form';
+import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn';
 
 const MoviesPage = () => {
   const [params, setParams] = useSearchParams();
@@ -76,9 +77,9 @@ console.log(query);
       {error && <ErrorMessage error={error} />}
       {slicedMovies.length > 0 && <MovieList results={movies} />}
       {isVisible && (
-        <button onClick={loadMore} disabled={loader}>
+        <LoadMoreBtn onClick={loadMore} disabled={loader}>
           {loader ? 'Loading...' : 'Load more'}
-        </button>
+        </LoadMoreBtn>
       )}
       <Toaster position="top-right" reverseOrder={false} />
     </div>

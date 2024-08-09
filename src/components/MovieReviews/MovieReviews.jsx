@@ -3,6 +3,7 @@ import { getReviews } from "../../getMovies/getMovies"
 import { useParams,  } from "react-router-dom"
 import Loader from "../Loader/Loader"
 import ErrorMessage from "../ErrorMessage/ErrorMessage"
+import styles from './MovieReviews.module.css'
 const MovieReviews = () => {
   const {movieId} = useParams()
   const [reviews, setReviews] = useState({results: []})
@@ -35,7 +36,7 @@ const MovieReviews = () => {
     {!loading && !error && reviews.results.length === 0 && <p>We don`t have reviews for this movie</p>}
     {reviews.results.length > 0 && <ul>
       {reviews.results.map(review =>
-        <div key={review.id}>
+        <div key={review.id} className={styles.review_container}>
           <b>Author: {review.author}</b>
           <p>Content: {review.content}</p>
         </div>

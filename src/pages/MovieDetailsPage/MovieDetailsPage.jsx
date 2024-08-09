@@ -41,9 +41,11 @@ console.log(details);
   return (
     <div className="container">
       <>
-        <button className={clsx('back-button',error ? styles.none : styles.ok)}>
-          <Link to={backLink.current} >Go back</Link>
-        </button>
+        <Link to={backLink.current}>
+          <button className={clsx('back-button',error ? styles.none : styles.ok)}>
+            Go back
+          </button>
+        </Link>
         {loading && <Loader />}
         {error && <NotFoundPage />}
         {!error && !loading && (
@@ -62,7 +64,7 @@ console.log(details);
                 <p>User Score: {details.vote_average ? Math.ceil(details.vote_average * 10) : 0}%</p>
                 <progress className={styles.progressBar} value={details.vote_average ? userScore * 0.01 : null} />
                 <h2 className={styles.movie_title}>Overview</h2>
-                <p>{details.overview}</p>
+                <p className={styles.overview}>{details.overview}</p>
                 <h2 className={styles.movie_title}>Genres</h2>
                 {details.genres && details.genres.length > 0 ? (
                   <div className={styles.genre_container}>

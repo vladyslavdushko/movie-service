@@ -14,7 +14,9 @@ p{
     border: 1px solid grey;
     width: fit-content;
     padding: 2px;
-    margin: 0 auto;
+    margin: 10px auto;
+    border-radius: 5px;
+    
 }
 
 .button{
