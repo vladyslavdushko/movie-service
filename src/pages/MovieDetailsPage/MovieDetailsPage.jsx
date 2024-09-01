@@ -1,12 +1,12 @@
-import { Suspense, useRef } from "react";
-import { useParams, Link, NavLink, Outlet, useLocation } from "react-router-dom";
-import { getMovieDetails } from "../../getMovies/getMovies";
-import { useEffect, useState } from "react";
+import { Suspense, useRef } from 'react';
+import { useParams, Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { getMovieDetails } from '../../getMovies/getMovies';
+import { useEffect, useState } from 'react';
 import styles from './MovieDetailsPage.module.css';
-import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import clsx from "clsx";
-import { Toaster } from "react-hot-toast";
-import Loader from "../../components/Loader/Loader";
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import clsx from 'clsx';
+import { Toaster } from 'react-hot-toast';
+import Loader from '../../components/Loader/Loader';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -25,7 +25,7 @@ const MovieDetailsPage = () => {
         setDetails(data);
       } catch (error) {
         setError(true);
-        console.error("Error fetching movie details:", error);
+        console.error('Error fetching movie details:', error);
       } finally {
         setLoading(false);
       }
@@ -37,14 +37,12 @@ const MovieDetailsPage = () => {
   }, [movieId]);
   const userScore = Math.ceil(details.vote_average * 10);
   const releaseYear = details.release_date ? details.release_date.slice(0, 4) : 'N/A';
-console.log(details);
+  console.log(details);
   return (
     <div className="container">
       <>
         <Link to={backLink.current}>
-          <button className={clsx('back-button',error ? styles.none : styles.ok)}>
-            Go back
-          </button>
+          <button className={clsx('back-button', error ? styles.none : styles.ok)}>Go back</button>
         </Link>
         {loading && <Loader />}
         {error && <NotFoundPage />}
@@ -59,13 +57,20 @@ console.log(details);
                 />
               )}
               <div>
-                <h3 className={styles.movie_title}>{details.title} ({releaseYear})</h3>
+                <h3 className={styles.movie_title}>
+                  {details.title} ({releaseYear})
+                </h3>
                 <p className={styles.tagline}>{details.tagline}</p>
-                <p>User Score: {details.vote_average ? Math.ceil(details.vote_average * 10) : 0}%</p>
-                <progress className={styles.progressBar} value={details.vote_average ? userScore * 0.01 : null} />
-                <h2 className={styles.movie_title}>Overview</h2>
+                <p>
+                  User Score: {details.vote_average ? Math.ceil(details.vote_average * 10) : 0}%
+                </p>
+                <progress
+                  className={styles.progressBar}
+                  value={details.vote_average ? userScore * 0.01 : null}
+                />
+                <h4 className={styles.movie_title}>Overview</h4>
                 <p className={styles.overview}>{details.overview}</p>
-                <h2 className={styles.movie_title}>Genres</h2>
+                <h4 className={styles.movie_title}>Genres</h4>
                 {details.genres && details.genres.length > 0 ? (
                   <div className={styles.genre_container}>
                     {details.genres.map((genre) => (
@@ -78,10 +83,14 @@ console.log(details);
               </div>
             </div>
             <div className={styles.additionalInfo}>
-              <h3 className={styles.movie_title}>Additional information</h3>
-              <ul>
-                <li><NavLink to='cast'>Cast</NavLink></li>
-                <li><NavLink to='reviews'>Reviews</NavLink></li>
+              <h3 className={styles.additiona_information}>Additional information</h3>
+              <ul className={styles.outlet_ul}>
+                <li>
+                  <NavLink to="cast">Cast</NavLink>
+                </li>
+                <li>
+                  <NavLink to="reviews">Reviews</NavLink>
+                </li>
               </ul>
             </div>
           </>

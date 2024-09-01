@@ -1,15 +1,16 @@
-
-
-.link{
-    text-decoration: none;
+.link {
+  text-decoration: none;
 }
 
-.isActive{
-    color: orange;
+.isActive {
+  color: orange;
 }
-a{
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
+a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
 }
 
+ul {
+  list-style-type: none;
+}

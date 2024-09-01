@@ -1,33 +1,68 @@
-import './Appp.css'
-import { lazy, Suspense } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import Navigation from './components/Navigation/Navigation'
-import Loader from './components/Loader/Loader'
+import './Appp.css';
+import { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Loader from './components/Loader/Loader';
+import Layout from './components/Layout/Layout';
+import RestrictedRoute from './routes/RestrictedRoute';
+import PrivateRoute from './routes/PrivateRoute';
 
-const HomePage = lazy(() => import('./pages/HomePage/HomePage'))
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'))
-const MovieDetailsPage = lazy(() => import('./pages/MovieDetailsPage/MovieDetailsPage'))
-const MoviesPage = lazy(() => import('./pages/MoviesPage/MoviesPage'))
-const MovieCast = lazy(() => import('./components/MovieCast/MovieCast'))
-const MovieReviews = lazy(() => import('./components/MovieReviews/MovieReviews'))
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
+const MovieDetailsPage = lazy(() => import('./pages/MovieDetailsPage/MovieDetailsPage'));
+const MoviesPage = lazy(() => import('./pages/MoviesPage/MoviesPage'));
+const MovieCast = lazy(() => import('./components/MovieCast/MovieCast'));
+const MovieReviews = lazy(() => import('./components/MovieReviews/MovieReviews'));
+const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 
 function App() {
   return (
     <>
-  <Navigation/>
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/movies' element={<MoviesPage />} />
-          <Route path='/movies/:movieId' element={<MovieDetailsPage />}>
-            <Route path='cast' element={<MovieCast />} />
-            <Route path='reviews' element={<MovieReviews />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/movies"
+              element={
+                <PrivateRoute>
+                  <MoviesPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/movies/:movieId"
+              element={
+                <PrivateRoute>
+                  <MovieDetailsPage />
+                </PrivateRoute>
+              }>
+              <Route path="cast" element={<MovieCast />} />
+              <Route path="reviews" element={<MovieReviews />} />
+            </Route>
           </Route>
-          <Route path='*' element={<NotFoundPage />} />
+          <Route
+            path="register"
+            element={
+              <RestrictedRoute>
+                <RegisterPage />
+              </RestrictedRoute>
+            }
+          />
+
+          <Route
+            path="login"
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
