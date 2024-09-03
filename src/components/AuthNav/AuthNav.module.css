@@ -1,0 +1,5 @@
+.auth_nav_item {
+  display: flex;
+  gap: 8px;
+  padding-right: 25px;
+}

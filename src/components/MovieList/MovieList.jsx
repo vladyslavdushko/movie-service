@@ -15,6 +15,7 @@ const MovieList = ({ results }) => {
                 alt={movie.title}
                 className={style.movi_poster}
               />
+              {console.log(`https://image.tmdb.org/t/p/original${movie.backdrop_path}`)}
               <div className={style.name_container}>
                 <p className={style.movie_title}>{movie.title}</p>
               </div>

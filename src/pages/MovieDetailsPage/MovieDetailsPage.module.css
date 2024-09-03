@@ -83,3 +83,16 @@
   gap: 20px;
   margin: 10px 0;
 }
+
+.backdrop_container {
+  background-image: linear-gradient(rgba(46, 47, 66, 0.7), rgba(46, 47, 66, 0.7)), url();
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  left: 0;
+  top: 0;
+  width: 1280px;
+  height: 100%;
+  z-index: -1;
+  margin: 0 auto;
+}

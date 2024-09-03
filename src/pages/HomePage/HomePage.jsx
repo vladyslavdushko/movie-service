@@ -28,7 +28,7 @@ const HomePage = () => {
   return (
     <>
       <div className="container">
-        <h1 className={styles.header}>Trending today</h1>
+        <h1 className={styles.header}>Discover Today`s Trending Movies</h1>
         {loading && <Loader className={styles.loader} />}
         {error && <ErrorMessage error={error} />}
         <MovieList results={movies} />

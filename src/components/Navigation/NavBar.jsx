@@ -27,7 +27,7 @@ const NavBar = () => {
             Movies
           </NavLink>
         </div>
-        {isLoggedIn ? <UserMenu /> : <AuthNav />}
+        <div className={styles.login_container}>{isLoggedIn ? <UserMenu /> : <AuthNav />}</div>
       </nav>
     </div>
   );

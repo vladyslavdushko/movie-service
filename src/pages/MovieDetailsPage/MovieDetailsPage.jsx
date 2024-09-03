@@ -35,12 +35,32 @@ const MovieDetailsPage = () => {
       getDetails(movieId);
     }
   }, [movieId]);
+
   const userScore = Math.ceil(details.vote_average * 10);
   const releaseYear = details.release_date ? details.release_date.slice(0, 4) : 'N/A';
-  console.log(details);
+
+  const backdropUrl = details.backdrop_path
+    ? `https://image.tmdb.org/t/p/w1280${details.backdrop_path}`
+    : null;
+
+  const backdropStyle = {
+    backgroundImage: backdropUrl
+      ? `linear-gradient(rgba(46, 47, 66, 0.9), rgba(46, 47, 66, 0.8)), url(${backdropUrl})`
+      : 'none',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    left: 0,
+    top: 0,
+    width: '1280px',
+    height: '100%',
+    zIndex: -1,
+    margin: '0 auto'
+  };
+
   return (
-    <div className="container">
-      <>
+    <div className={styles.sbackdrop_container}>
+      <div className="container">
         <Link to={backLink.current}>
           <button className={clsx('back-button', error ? styles.none : styles.ok)}>Go back</button>
         </Link>
@@ -48,7 +68,7 @@ const MovieDetailsPage = () => {
         {error && <NotFoundPage />}
         {!error && !loading && (
           <>
-            <div className={styles.container}>
+            <div className={styles.container} style={backdropStyle}>
               {details.poster_path && (
                 <img
                   className={styles.movie_img}
@@ -99,7 +119,7 @@ const MovieDetailsPage = () => {
           <Outlet />
         </Suspense>
         <Toaster />
-      </>
+      </div>
     </div>
   );
 };
