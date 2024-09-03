@@ -11,7 +11,8 @@ h5,
 p,
 ul,
 li,
-a {
+a,
+label {
   color: #d3d3d3;
 }
 * {

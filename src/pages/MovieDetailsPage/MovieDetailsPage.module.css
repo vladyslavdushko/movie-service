@@ -96,3 +96,7 @@
   z-index: -1;
   margin: 0 auto;
 }
+
+.overview_container {
+  padding: 5px;
+}

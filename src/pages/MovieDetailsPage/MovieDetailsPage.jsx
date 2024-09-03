@@ -52,7 +52,6 @@ const MovieDetailsPage = () => {
     backgroundRepeat: 'no-repeat',
     left: 0,
     top: 0,
-    width: '1280px',
     height: '100%',
     zIndex: -1,
     margin: '0 auto'
@@ -76,7 +75,7 @@ const MovieDetailsPage = () => {
                   alt={details.title}
                 />
               )}
-              <div>
+              <div className={styles.overview_container}>
                 <h3 className={styles.movie_title}>
                   {details.title} ({releaseYear})
                 </h3>
