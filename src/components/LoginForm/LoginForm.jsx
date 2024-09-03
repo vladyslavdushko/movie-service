@@ -32,13 +32,23 @@ const LoginForm = () => {
           <div className={styles.field_container}>
             <label htmlFor="email">Email</label>
             <Field type="email" id="email" name="email" />
-            <ErrorMessage name="email" component="div" className={styles.error_message} />
+            <ErrorMessage
+              name="email"
+              component="p"
+              className={styles.error_message}
+              style={{ color: 'red' }}
+            />
           </div>
 
           <div className={styles.field_container}>
             <label htmlFor="password">Password</label>
             <Field type="password" id="password" name="password" />
-            <ErrorMessage name="password" component="div" className={styles.error_message} />
+            <ErrorMessage
+              name="password"
+              component="p"
+              className={styles.error_message}
+              style={{ color: 'red' }}
+            />
           </div>
           <button type="submit">Log in</button>
         </Form>
