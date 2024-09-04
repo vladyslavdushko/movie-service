@@ -6,7 +6,7 @@ import Layout from './components/Layout/Layout';
 import RestrictedRoute from './routes/RestrictedRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import { useDispatch } from 'react-redux';
-import { getMe } from './redux/auth/operations';
+import { getMe } from './redux/firebaseAuth/operations';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
@@ -23,6 +23,11 @@ function App() {
   useEffect(() => {
     dispatch(getMe());
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(getMe());
+  // }, [dispatch]);
+
   return (
     <>
       <Suspense fallback={<Loader />}>

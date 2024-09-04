@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 import styles from './Navigations.module.css';
 import { useSelector } from 'react-redux';
-import { selectIsLoggedIn } from '../../redux/auth/selectors';
 import UserMenu from '../UserMenu/UserMenu';
 import AuthNav from '../AuthNav/AuthNav';
+import { selectIsLoggedInFire } from '../../redux/firebaseAuth/selectors';
 
 const NavBar = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedInFire);
   return (
     <div>
       <nav className={styles.nav_container}>

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { authReducer } from './auth/slice';
+// import { authReducer } from './auth/slice';
 import {
   persistStore,
   persistReducer,
@@ -11,6 +11,7 @@ import {
   REGISTER
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { fireBaseReducer } from './firebaseAuth/slice';
 
 const persistConfig = {
   key: 'root',
@@ -20,7 +21,8 @@ const persistConfig = {
 };
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(persistConfig, authReducer)
+    fireBaseAuth: persistReducer(persistConfig, fireBaseReducer)
+    // fireBaseAuth: fireBaseReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

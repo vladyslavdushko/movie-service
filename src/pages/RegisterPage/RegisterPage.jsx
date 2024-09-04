@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
-import { selectIsLoggedIn } from '../../redux/auth/selectors';
 import { Navigate } from 'react-router-dom';
 import styles from './RegisterPage.module.css';
+import { selectIsLoggedInFire } from '../../redux/firebaseAuth/selectors';
 
 const RegisterPage = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedInFire);
   if (isLoggedIn) {
     return <Navigate to="/" />;
   }

@@ -2,10 +2,10 @@ import { useSelector } from 'react-redux';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import styles from './LoginPage.module.css';
 import { Navigate } from 'react-router-dom';
-import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import { selectIsLoggedInFire } from '../../redux/firebaseAuth/selectors';
 
 const LoginPage = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedInFire);
 
   if (isLoggedIn) {
     return <Navigate to="/" />;

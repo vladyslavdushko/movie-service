@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import styles from './RegisterForm.module.css';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { registerUser } from '../../redux/auth/operations';
+import { createUser } from '../../redux/firebaseAuth/operations';
 
 const RegisterForm = () => {
   const validationSchema = Yup.object({
@@ -27,11 +27,11 @@ const RegisterForm = () => {
 
   const onSubmit = (values, actions) => {
     const userData = {
-      name: values.name,
       email: values.email,
       password: values.password
     };
-    dispatch(registerUser(userData));
+    dispatch(createUser(userData));
+    // createUser(userData.email, userData.password);
     actions.resetForm();
   };
 
