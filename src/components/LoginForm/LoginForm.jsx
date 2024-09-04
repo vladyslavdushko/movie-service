@@ -34,34 +34,27 @@ const LoginForm = () => {
     <div className={styles.form_container}>
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
         <Form className={styles.form}>
-          <div className={styles.field_container}>
-            <label htmlFor="email">Email</label>
-            <Field type="email" id="email" name="email" />
-            <ErrorMessage
-              name="email"
-              component="p"
-              className={styles.error_message}
-              style={{ color: 'red' }}
-            />
-          </div>
+          <label htmlFor="email" className={styles.field_container}>
+            Email
+            <Field type="email" id="email" name="email" className={styles.input_field} />
+            <ErrorMessage name="email" component="p" className={styles.error_message} />
+          </label>
 
-          <div className={styles.field_container}>
-            <label htmlFor="password">Password</label>
-            <Field type="password" id="password" name="password" />
-            <ErrorMessage
-              name="password"
-              component="p"
-              className={styles.error_message}
-              style={{ color: 'red' }}
-            />
-          </div>
-          <button type="submit">Log in</button>
+          <label htmlFor="password" className={styles.field_container}>
+            Password
+            <Field type="password" id="password" name="password" className={styles.input_field} />
+            <ErrorMessage name="password" component="p" className={styles.error_message} />
+          </label>
+
+          <button type="submit" className={styles.submit_button}>
+            Log in
+          </button>
         </Form>
       </Formik>
 
       <div className={styles.link_container}>
-        <p>
-          Don’t have an account?
+        <p className={styles.text}>
+          Don’t have an account?{' '}
           <Link to="/register" className={styles.register_link}>
             Register
           </Link>

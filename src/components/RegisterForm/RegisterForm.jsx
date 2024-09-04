@@ -41,28 +41,30 @@ const RegisterForm = () => {
         <Form className={styles.form}>
           <label className={styles.field_container}>
             Name
-            <Field type="text" name="name" />
-            <ErrorMessage name="name" component="p" style={{ color: 'red' }} />
+            <Field type="text" name="name" className={styles.input_field} />
+            <ErrorMessage name="name" component="p" className={styles.error_message} />
           </label>
 
           <label className={styles.field_container}>
             Email
-            <Field type="email" name="email" />
-            <ErrorMessage name="email" component="p" style={{ color: 'red' }} />
+            <Field type="email" name="email" className={styles.input_field} />
+            <ErrorMessage name="email" component="p" className={styles.error_message} />
           </label>
 
           <label className={styles.field_container}>
             Password
-            <Field type="password" name="password" />
-            <ErrorMessage name="password" component="p" style={{ color: 'red' }} />
+            <Field type="password" name="password" className={styles.input_field} />
+            <ErrorMessage name="password" component="p" className={styles.error_message} />
           </label>
 
-          <button type="submit">Register</button>
+          <button type="submit" className={styles.submit_button}>
+            Register
+          </button>
         </Form>
       </Formik>
 
       <div className={styles.link_container}>
-        <p>
+        <p className={styles.text}>
           Already have an account?{' '}
           <Link to="/login" className={styles.register_link}>
             Login

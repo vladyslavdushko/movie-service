@@ -11,8 +11,10 @@ const RegisterPage = () => {
   }
   return (
     <div>
-      <h2 className={styles.header}>Registration</h2>
-      <RegisterForm />
+      <div className={styles.register_contsiner}>
+        <h2 className={styles.header}>Registration</h2>
+        <RegisterForm />
+      </div>
     </div>
   );
 };

@@ -12,9 +12,11 @@ const LoginPage = () => {
   }
 
   return (
-    <div>
-      <h2 className={styles.header}>LoginPage</h2>
-      <LoginForm />
+    <div className="container">
+      <div className={styles.login_container}>
+        <h2 className={styles.header}>LoginPage</h2>
+        <LoginForm />
+      </div>
     </div>
   );
 };
