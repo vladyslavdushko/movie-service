@@ -5,3 +5,8 @@
 .register_contsiner {
   padding-top: 10%;
 }
+
+.google_signIn {
+  width: 100px;
+  background-color: white;
+}

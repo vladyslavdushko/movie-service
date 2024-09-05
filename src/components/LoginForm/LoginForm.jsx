@@ -4,6 +4,7 @@ import styles from './LoginForm.module.css';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/firebaseAuth/operations';
+import GoogleButton from '../GoogleButton/GoogleButton';
 const LoginForm = () => {
   const dispatch = useDispatch();
   const validationSchema = Yup.object({
@@ -49,6 +50,7 @@ const LoginForm = () => {
           <button type="submit" className={styles.submit_button}>
             Log in
           </button>
+          <GoogleButton>Log in with Google</GoogleButton>
         </Form>
       </Formik>
 

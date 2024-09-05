@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createUser, getMe, loginUser, signOutUser } from './operations';
+import { createUser, getMe, loginUser, signInWithGoogle, signOutUser } from './operations';
 
 const initialState = {
   user: {
@@ -38,6 +38,16 @@ export const fireBaseAuthSlice = createSlice({
         state.token = action.payload.uid;
         state.isRefreshing = false;
         state.isLoggedIn = true;
+      })
+      .addCase(signInWithGoogle.fulfilled, (state, { payload }) => {
+        state.user.email = payload.email;
+        state.user.name = payload.displayName;
+        state.token = payload.uid;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(signInWithGoogle.rejected, () => {
+        return initialState;
       });
   }
 });

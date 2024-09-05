@@ -1,18 +1,11 @@
-.error_message {
-  color: red;
-  text-align: center;
-}
-
 /* Контейнер для сторінки */
 .container {
-  text-align: center;
-  margin-top: 50px;
+  margin-bottom: 10px;
 }
 
-/* Стиль для кнопки "Go back" */
 .back_button {
   padding: 5px 15px;
-  background-color: #007bff;
+  background-color: #385170;
   color: #fff;
   font-size: 14px;
   font-weight: bold;

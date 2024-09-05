@@ -4,9 +4,9 @@ import { getMovieDetails } from '../../getMovies/getMovies';
 import { useEffect, useState } from 'react';
 import styles from './MovieDetailsPage.module.css';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import clsx from 'clsx';
 import { Toaster } from 'react-hot-toast';
 import Loader from '../../components/Loader/Loader';
+import BackButton from '../../components/BackButton/BackButton';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -56,13 +56,12 @@ const MovieDetailsPage = () => {
     zIndex: -1,
     margin: '0 auto'
   };
+  console.log(details, 'dmovie details');
 
   return (
     <div className={styles.sbackdrop_container}>
       <div className="container">
-        <Link to={backLink.current}>
-          <button className={clsx('back-button', error ? styles.none : styles.ok)}>Go back</button>
-        </Link>
+        <BackButton props={backLink.current} />
         {loading && <Loader />}
         {error && <NotFoundPage />}
         {!error && !loading && (

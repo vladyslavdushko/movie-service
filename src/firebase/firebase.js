@@ -7,6 +7,7 @@ import {
   setPersistence,
   signInWithEmailAndPassword
 } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAGZQMahB8tqBG5-m_a2PCDreNyW3as6nM',
@@ -20,3 +21,5 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
+
+export const provider = new GoogleAuthProvider();

@@ -6,6 +6,7 @@ import { selectIsLoggedInFire } from '../../redux/firebaseAuth/selectors';
 
 const RegisterPage = () => {
   const isLoggedIn = useSelector(selectIsLoggedInFire);
+
   if (isLoggedIn) {
     return <Navigate to="/" />;
   }

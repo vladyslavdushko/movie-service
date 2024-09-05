@@ -1,23 +1,26 @@
 import {
-  browserLocalPersistence,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
-  setPersistence,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
+  signInWithPopup
 } from 'firebase/auth';
-import { auth } from '../../firebase/firebase';
+import { auth, provider } from '../../firebase/firebase';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { clearToken, setToken } from '../../config/api';
 
 export const createUser = createAsyncThunk(
   'fireBaseAuth/register',
   async ({ email, password }, thunkAPI) => {
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-      await setPersistence(auth, browserLocalPersistence);
-      return user;
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+      const user = userCredential.user;
+      return {
+        email: user.email,
+        uid: user.uid,
+        displayName: user.displayName || null
+      };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -28,10 +31,12 @@ export const loginUser = createAsyncThunk(
   'fireBaseAuth/login',
   async ({ email, password }, thunkAPI) => {
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      await setPersistence(auth, browserLocalPersistence);
-      setToken(user.user.accessToken);
-      return user;
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      return {
+        email: user.email,
+        uid: user.uid
+      };
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -41,8 +46,6 @@ export const loginUser = createAsyncThunk(
 export const signOutUser = createAsyncThunk('fireBaseAuth/signout', async (_, thunkAPI) => {
   try {
     await signOut(auth);
-    console.log('sign put successfully');
-    clearToken();
     return;
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -55,7 +58,6 @@ export const getMe = createAsyncThunk('fireBaseAuth/getMe', async (_, thunkAPI) 
     return new Promise((resolve, reject) => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          // Користувач залогінений
           const userData = {
             email: user.email,
             uid: user.uid,
@@ -64,7 +66,6 @@ export const getMe = createAsyncThunk('fireBaseAuth/getMe', async (_, thunkAPI) 
           };
           resolve(userData);
         } else {
-          // Користувач не залогінений
           reject(new Error('User is not logged in'));
         }
       });
@@ -73,3 +74,22 @@ export const getMe = createAsyncThunk('fireBaseAuth/getMe', async (_, thunkAPI) 
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const signInWithGoogle = createAsyncThunk(
+  'fireBaseGoogleAuth/googleSignIn',
+  async (_, thunkAPI) => {
+    try {
+      const googleUser = await signInWithPopup(auth, provider);
+
+      const user = googleUser.user;
+
+      return {
+        email: user.email,
+        displayName: user.displayName,
+        uid: user.uid
+      };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
