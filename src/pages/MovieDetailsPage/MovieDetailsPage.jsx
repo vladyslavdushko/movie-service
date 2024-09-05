@@ -1,5 +1,5 @@
 import { Suspense, useRef } from 'react';
-import { useParams, Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { useParams, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { getMovieDetails } from '../../getMovies/getMovies';
 import { useEffect, useState } from 'react';
 import styles from './MovieDetailsPage.module.css';
@@ -7,6 +7,7 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { Toaster } from 'react-hot-toast';
 import Loader from '../../components/Loader/Loader';
 import BackButton from '../../components/BackButton/BackButton';
+import { addToWatchLater, auth } from '../../firebase/firebase';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -15,6 +16,7 @@ const MovieDetailsPage = () => {
   const [error, setError] = useState(false);
   const location = useLocation();
   const backLink = useRef(location.state || '/');
+  const user = auth.currentUser;
 
   useEffect(() => {
     const getDetails = async (id) => {
@@ -35,6 +37,33 @@ const MovieDetailsPage = () => {
       getDetails(movieId);
     }
   }, [movieId]);
+
+  const handleAddToWatchLater = () => {
+    if (!user) {
+      console.error('User is not logged in');
+      return;
+    }
+
+    if (!movieId) {
+      console.error('Movie ID is missing');
+      return;
+    }
+
+    const movieData = {
+      id: movieId,
+      backdrop_path: details.backdrop_path,
+      genres: details.genres ? details.genres.map((genre) => genre.name) : [],
+      overview: details.overview,
+      poster_path: details.poster_path,
+      release_date: details.release_date,
+      tagline: details.tagline,
+      title: details.title,
+      vote_average: details.vote_average,
+      uid: user.uid
+    };
+
+    addToWatchLater(movieData, user.uid);
+  };
 
   const userScore = Math.ceil(details.vote_average * 10);
   const releaseYear = details.release_date ? details.release_date.slice(0, 4) : 'N/A';
@@ -86,6 +115,12 @@ const MovieDetailsPage = () => {
                   className={styles.progressBar}
                   value={details.vote_average ? userScore * 0.01 : null}
                 />
+                <button
+                  className={styles.watch_later_bth}
+                  type="button"
+                  onClick={handleAddToWatchLater}>
+                  +Add to watchlist
+                </button>
                 <h4 className={styles.movie_title}>Overview</h4>
                 <p className={styles.overview}>{details.overview}</p>
                 <h4 className={styles.movie_title}>Genres</h4>

@@ -16,11 +16,13 @@ export const createUser = createAsyncThunk(
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
       const user = userCredential.user;
-      return {
-        email: user.email,
-        uid: user.uid,
-        displayName: user.displayName || null
-      };
+      if (user) {
+        return {
+          email: user.email,
+          uid: user.uid,
+          displayName: user.displayName || null
+        };
+      }
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -33,10 +35,15 @@ export const loginUser = createAsyncThunk(
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      return {
-        email: user.email,
-        uid: user.uid
-      };
+
+      console.log(userCredential);
+      if (user) {
+        return {
+          email: user.email,
+          uid: user.uid,
+          displayName: user.displayName || null
+        };
+      }
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

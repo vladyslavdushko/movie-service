@@ -7,6 +7,7 @@ import RestrictedRoute from './routes/RestrictedRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import { useDispatch } from 'react-redux';
 import { getMe } from './redux/firebaseAuth/operations';
+import WatchLaterPage from './pages/WatchLaterPage/WatchLaterPage';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
@@ -52,6 +53,14 @@ function App() {
               <Route path="cast" element={<MovieCast />} />
               <Route path="reviews" element={<MovieReviews />} />
             </Route>
+            <Route
+              path="watch-later"
+              element={
+                <PrivateRoute>
+                  <WatchLaterPage />
+                </PrivateRoute>
+              }
+            />
           </Route>
           <Route
             path="register"

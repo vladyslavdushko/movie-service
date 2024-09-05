@@ -26,6 +26,13 @@ const NavBar = () => {
             }}>
             Movies
           </NavLink>
+          <NavLink
+            to="watch-later"
+            className={({ isActive }) => {
+              return clsx('link', isActive && 'isActive');
+            }}>
+            Watchlist
+          </NavLink>
         </div>
         <div className={styles.login_container}>{isLoggedIn ? <UserMenu /> : <AuthNav />}</div>
       </nav>
