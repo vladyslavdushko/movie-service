@@ -1,17 +1,20 @@
-import { useDispatch } from 'react-redux';
-import { signInWithGoogle } from '../../redux/firebaseAuth/operations';
 import styles from './GoogleButton.module.css';
 import googleLogo from '../../images/googleLogo.svg';
+import { useDispatch } from 'react-redux';
+import { signInWithGoogle } from '../../redux/firebaseAuth/operations';
+
 const GoogleButton = ({ children }) => {
   const dispatch = useDispatch();
   return (
-    <button
-      onClick={() => dispatch(signInWithGoogle())}
-      className={styles.google_button}
-      type="button">
-      <img src={googleLogo} alt="Google logo" className={styles.google_logo} />
-      {children}
-    </button>
+    <div>
+      <button
+        className={styles.google_button}
+        type="button"
+        onClick={() => dispatch(signInWithGoogle())}>
+        <img src={googleLogo} alt="Google logo" className={styles.google_logo} />
+        {children}
+      </button>
+    </div>
   );
 };
 

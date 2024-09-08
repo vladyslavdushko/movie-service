@@ -3,8 +3,7 @@ import styles from './UserMenu.module.css';
 import { selectEmail, selectName } from '../../redux/firebaseAuth/selectors';
 import { signOutUser } from '../../redux/firebaseAuth/operations';
 import logOut from '../../images/logOut.svg';
-import { Link, NavLink } from 'react-router-dom';
-import clsx from 'clsx';
+
 const UserMenu = () => {
   const email = useSelector(selectEmail);
   const name = useSelector(selectName);

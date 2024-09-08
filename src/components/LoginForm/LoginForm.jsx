@@ -3,10 +3,17 @@ import * as Yup from 'yup';
 import styles from './LoginForm.module.css';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../redux/firebaseAuth/operations';
+import { loginUser, redirectResult } from '../../redux/firebaseAuth/operations';
 import GoogleButton from '../GoogleButton/GoogleButton';
+import { useEffect } from 'react';
+
 const LoginForm = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(redirectResult());
+  }, [dispatch]);
+
   const validationSchema = Yup.object({
     email: Yup.string().email('Невірний формат електронної пошти').required('Це поле обов’язкове'),
     password: Yup.string()
@@ -40,17 +47,15 @@ const LoginForm = () => {
             <Field type="email" id="email" name="email" className={styles.input_field} />
             <ErrorMessage name="email" component="p" className={styles.error_message} />
           </label>
-
           <label htmlFor="password" className={styles.field_container}>
             Password
             <Field type="password" id="password" name="password" className={styles.input_field} />
             <ErrorMessage name="password" component="p" className={styles.error_message} />
           </label>
-
           <button type="submit" className={styles.submit_button}>
             Log in
           </button>
-          <GoogleButton>Log in with Google</GoogleButton>
+          <GoogleButton>Log in</GoogleButton>
         </Form>
       </Formik>
 

@@ -4,10 +4,11 @@ import { getMovieDetails } from '../../getMovies/getMovies';
 import { useEffect, useState } from 'react';
 import styles from './MovieDetailsPage.module.css';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import Loader from '../../components/Loader/Loader';
 import BackButton from '../../components/BackButton/BackButton';
 import { addToWatchLater, auth } from '../../firebase/firebase';
+import AddToWatchListBtn from '../../components/AddToWatchListBtn/AddToWatchListBtn';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -63,6 +64,7 @@ const MovieDetailsPage = () => {
     };
 
     addToWatchLater(movieData, user.uid);
+    toast.success('Movie added to watchlist');
   };
 
   const userScore = Math.ceil(details.vote_average * 10);
@@ -115,12 +117,7 @@ const MovieDetailsPage = () => {
                   className={styles.progressBar}
                   value={details.vote_average ? userScore * 0.01 : null}
                 />
-                <button
-                  className={styles.watch_later_bth}
-                  type="button"
-                  onClick={handleAddToWatchLater}>
-                  +Add to watchlist
-                </button>
+                <AddToWatchListBtn handleAddToWatchLater={handleAddToWatchLater} />
                 <h4 className={styles.movie_title}>Overview</h4>
                 <p className={styles.overview}>{details.overview}</p>
                 <h4 className={styles.movie_title}>Genres</h4>

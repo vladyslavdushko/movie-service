@@ -4,7 +4,8 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  signInWithPopup
+  signInWithRedirect,
+  getRedirectResult
 } from 'firebase/auth';
 import { auth, provider } from '../../firebase/firebase';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -83,20 +84,25 @@ export const getMe = createAsyncThunk('fireBaseAuth/getMe', async (_, thunkAPI) 
 });
 
 export const signInWithGoogle = createAsyncThunk(
-  'fireBaseGoogleAuth/googleSignIn',
+  'fireBaseAuth/googleSignIn',
   async (_, thunkAPI) => {
     try {
-      const googleUser = await signInWithPopup(auth, provider);
-
-      const user = googleUser.user;
-
-      return {
-        email: user.email,
-        displayName: user.displayName,
-        uid: user.uid
-      };
+      await signInWithRedirect(auth, provider);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const redirectResult = createAsyncThunk(
+  'fireBaseAuth/redirectResult',
+  async (_, thunkAPI) => {
+    try {
+      const result = await getRedirectResult(auth);
+      console.log(result, 'redirect result');
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

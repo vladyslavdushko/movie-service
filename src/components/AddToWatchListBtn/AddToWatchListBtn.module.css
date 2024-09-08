@@ -1,0 +1,35 @@
+.watchLaterButton {
+  background-color: #ff6b08; /* Яскравий помаранчевий фон */
+  color: white; /* Білий текст */
+  border: none; /* Без обрамлення */
+  border-radius: 20px; /* Округлі краї */
+  padding: 8px 16px; /* Внутрішні відступи */
+  font-size: 14px; /* Розмір тексту */
+  cursor: pointer; /* Курсор у вигляді руки при наведенні */
+  transition: background-color 0.3s ease; /* Плавна зміна кольору фону */
+  display: flex; /* Вирівнювання контенту */
+  align-items: center; /* Вирівнювання по вертикалі */
+  gap: 8px; /* Відступ між іконкою і текстом */
+}
+
+.watchLaterButton:hover {
+  background-color: #e65c00; /* Трохи темніший помаранчевий при наведенні */
+}
+
+.watchLaterButton:active {
+  background-color: #cc5000; /* Темніший колір при натисканні */
+  transform: scale(0.98); /* Легке зменшення кнопки при натисканні */
+}
+
+.watchLaterButton svg {
+  width: 16px; /* Розмір іконки */
+  height: 16px;
+}
+
+.button_container {
+  margin: 10px 0;
+}
+
+.add_to_watchlist_img {
+  fill: white;
+}

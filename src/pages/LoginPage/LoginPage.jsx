@@ -10,7 +10,6 @@ const LoginPage = () => {
   if (isLoggedIn) {
     return <Navigate to="/" />;
   }
-
   return (
     <div className="container">
       <div className={styles.login_container}>

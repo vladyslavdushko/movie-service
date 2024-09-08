@@ -22,3 +22,14 @@
 .login_container {
   display: flex;
 }
+
+@media (max-width: 610px) {
+  .inner_container {
+    display: none;
+  }
+
+  .nav_container {
+    margin-left: auto;
+    justify-content: space-between;
+  }
+}
