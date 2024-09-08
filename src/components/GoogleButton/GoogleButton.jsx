@@ -1,7 +1,7 @@
 import styles from './GoogleButton.module.css';
 import googleLogo from '../../images/googleLogo.svg';
 import { useDispatch } from 'react-redux';
-import { signInWithGoogle } from '../../redux/firebaseAuth/operations';
+import { signInWithGooglePopUp } from '../../redux/firebaseAuth/operations';
 
 const GoogleButton = ({ children }) => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const GoogleButton = ({ children }) => {
       <button
         className={styles.google_button}
         type="button"
-        onClick={() => dispatch(signInWithGoogle())}>
+        onClick={() => dispatch(signInWithGooglePopUp())}>
         <img src={googleLogo} alt="Google logo" className={styles.google_logo} />
         {children}
       </button>
