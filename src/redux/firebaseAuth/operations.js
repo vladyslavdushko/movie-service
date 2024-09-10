@@ -5,7 +5,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
   signInWithRedirect,
-  getRedirectResult,
   signInWithPopup
 } from 'firebase/auth';
 import { auth, provider } from '../../firebase/firebase';
@@ -38,7 +37,6 @@ export const loginUser = createAsyncThunk(
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      console.log(userCredential);
       if (user) {
         return {
           email: user.email,
@@ -91,19 +89,6 @@ export const signInWithGoogle = createAsyncThunk(
       await signInWithRedirect(auth, provider);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const redirectResult = createAsyncThunk(
-  'fireBaseAuth/redirectResult',
-  async (_, thunkAPI) => {
-    try {
-      const result = await getRedirectResult(auth);
-      console.log(result, 'redirect result');
-    } catch (error) {
-      console.error(error);
-      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

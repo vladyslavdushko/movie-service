@@ -1,12 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  createUser,
-  getMe,
-  loginUser,
-  redirectResult,
-  signInWithGooglePopUp,
-  signOutUser
-} from './operations';
+import { createUser, getMe, loginUser, signInWithGooglePopUp, signOutUser } from './operations';
 
 const initialState = {
   user: {
@@ -59,21 +52,6 @@ export const fireBaseAuthSlice = createSlice({
       })
       .addCase(getMe.pending, (state) => {
         state.isRefreshing = true;
-      })
-      .addCase(redirectResult.fulfilled, (state, { payload }) => {
-        console.log(payload, 'signInWithgoogle payload');
-
-        state.user.email = payload.email;
-        state.user.name = payload.displayName;
-        state.token = payload.uid;
-        state.isLoggedIn = true;
-        state.isRefreshing = false;
-      })
-      .addCase(redirectResult.pending, (state) => {
-        state.isRefreshing = true;
-      })
-      .addCase(redirectResult.rejected, () => {
-        return initialState;
       })
       .addCase(signInWithGooglePopUp.fulfilled, (state, { payload }) => {
         state.isLoggedIn = true;

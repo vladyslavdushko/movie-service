@@ -6,7 +6,7 @@ import { signInWithGooglePopUp } from '../../redux/firebaseAuth/operations';
 const GoogleButton = ({ children }) => {
   const dispatch = useDispatch();
   return (
-    <div>
+    <>
       <button
         className={styles.google_button}
         type="button"
@@ -14,7 +14,7 @@ const GoogleButton = ({ children }) => {
         <img src={googleLogo} alt="Google logo" className={styles.google_logo} />
         {children}
       </button>
-    </div>
+    </>
   );
 };
 

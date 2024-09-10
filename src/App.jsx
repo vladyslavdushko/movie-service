@@ -8,6 +8,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import { useDispatch } from 'react-redux';
 import { getMe } from './redux/firebaseAuth/operations';
 import WatchLaterPage from './pages/WatchLaterPage/WatchLaterPage';
+import { auth } from './firebase/firebase';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
