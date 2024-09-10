@@ -8,7 +8,6 @@ const MovieList = ({ results }) => {
     <ul className={style.results}>
       {results.map((movie) => (
         <li key={movie.id} className={style.movie_list_item}>
-          <button></button>
           <Link to={`/movies/${movie.id}`} state={location}>
             <div className={style.item_container}>
               <img
