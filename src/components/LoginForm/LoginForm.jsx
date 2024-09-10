@@ -4,9 +4,7 @@ import styles from './LoginForm.module.css';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/firebaseAuth/operations';
-import { auth, redirectResult } from '../../firebase/firebase';
 import GoogleButton from '../GoogleButton/GoogleButton';
-import { useEffect } from 'react';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
