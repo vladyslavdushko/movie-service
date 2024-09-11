@@ -12,7 +12,7 @@ const MovieList = ({ results }) => {
   const isLoggedIn = useSelector(selectIsLoggedInFire);
   const handleAddMovie = async (movieId, title, poster) => {
     if (!isLoggedIn) {
-      toast.error('PLease log in firstly');
+      toast.error('Please log in firstly');
     }
     const movieData = {
       id: movieId,
