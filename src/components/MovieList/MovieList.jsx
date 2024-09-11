@@ -2,15 +2,18 @@ import { Link, useLocation } from 'react-router-dom';
 import style from './MovieList.module.css';
 import { FaPlusCircle } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import { selectToken } from '../../redux/firebaseAuth/selectors';
+import { selectIsLoggedInFire, selectToken } from '../../redux/firebaseAuth/selectors';
 import { addToWatchLater } from '../../firebase/firebase';
 import toast from 'react-hot-toast';
 
 const MovieList = ({ results }) => {
   const location = useLocation();
   const uid = useSelector(selectToken);
-
+  const isLoggedIn = useSelector(selectIsLoggedInFire);
   const handleAddMovie = async (movieId, title, poster) => {
+    if (!isLoggedIn) {
+      toast.error('PLease log in firstly');
+    }
     const movieData = {
       id: movieId,
       title: title,
