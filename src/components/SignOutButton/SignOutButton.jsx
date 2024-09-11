@@ -7,12 +7,12 @@ const SignOutButton = () => {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <>
       <button className={styles.signout_button} onClick={() => dispatch(signOutUser())}>
         <img src={logOut} alt="logout-icon" />
         Sign out
       </button>
-    </div>
+    </>
   );
 };
 

@@ -2,5 +2,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding-right: 25px;
+}
+
+@media (max-width: 610px) {
+  .sign_out_button {
+    display: none;
+  }
 }

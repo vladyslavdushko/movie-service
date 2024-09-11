@@ -2,7 +2,8 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, getRedirectResult, onAuthStateChanged } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { doc, getFirestore, setDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, getFirestore, setDoc, collection, getDocs, deleteDoc } from 'firebase/firestore';
+import toast from 'react-hot-toast';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAGZQMahB8tqBG5-m_a2PCDreNyW3as6nM',
@@ -24,17 +25,22 @@ export const db = getFirestore();
 
 export const addToWatchLater = async (movieData, userId) => {
   try {
-    if (!movieData.id || !userId) {
-      throw new Error('Movie ID or User ID is missing');
-    }
-
     const movieDocRef = doc(db, 'watchLater', userId, 'movies', movieData.id.toString());
 
     await setDoc(movieDocRef, movieData);
-
-    console.log('Movie added to watch later successfully');
   } catch (error) {
-    console.error('Error adding movie to watch later:', error);
+    throw error.message;
+  }
+};
+
+export const removeFromWatchLater = async (movieId, userId) => {
+  try {
+    const movieDocRef = doc(db, 'watchLater', userId, 'movies', movieId.toString());
+
+    await deleteDoc(movieDocRef);
+    return;
+  } catch (error) {
+    throw error.message;
   }
 };
 

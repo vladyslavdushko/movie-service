@@ -10,7 +10,9 @@ const UserMenu = () => {
   return (
     <div className={styles.user_nav_item}>
       <p>Welcome, {name ? name : email} 😎</p>
-      <SignOutButton />
+      <div className={styles.sign_out_button}>
+        <SignOutButton />
+      </div>
     </div>
   );
 };

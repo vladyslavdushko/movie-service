@@ -8,6 +8,7 @@ import { selectIsLoggedInFire } from '../../redux/firebaseAuth/selectors';
 import { RiMenu2Fill } from 'react-icons/ri';
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
+import SignOutButton from '../SignOutButton/SignOutButton';
 
 const NavBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedInFire);
@@ -57,7 +58,7 @@ const NavBar = () => {
           <IoClose className={styles.close_button} onClick={handleBurgerMenu} />
 
           <ul className={styles.inner_mobile_menu_container}>
-            <li className={styles.nav_mobile_menu_item}>
+            <li className={styles.nav_mobile_menu_item} onClick={handleBurgerMenu}>
               <NavLink
                 to="/"
                 className={({ isActive }) => {
@@ -66,7 +67,7 @@ const NavBar = () => {
                 Home
               </NavLink>
             </li>
-            <li>
+            <li onClick={handleBurgerMenu}>
               <NavLink
                 to="/movies"
                 className={({ isActive }) => {
@@ -75,7 +76,7 @@ const NavBar = () => {
                 Movies
               </NavLink>
             </li>
-            <li>
+            <li onClick={handleBurgerMenu}>
               <NavLink
                 to="watch-later"
                 className={({ isActive }) => {
@@ -83,6 +84,9 @@ const NavBar = () => {
                 }}>
                 Watchlist
               </NavLink>
+            </li>
+            <li>
+              <SignOutButton />
             </li>
           </ul>
         </ul>

@@ -9,6 +9,8 @@ import Loader from '../../components/Loader/Loader';
 import BackButton from '../../components/BackButton/BackButton';
 import { addToWatchLater, auth } from '../../firebase/firebase';
 import AddToWatchListBtn from '../../components/AddToWatchListBtn/AddToWatchListBtn';
+import { useSelector } from 'react-redux';
+import { selectToken } from '../../redux/firebaseAuth/selectors';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -18,6 +20,8 @@ const MovieDetailsPage = () => {
   const location = useLocation();
   const backLink = useRef(location.state || '/');
   const user = auth.currentUser;
+
+  const uid = useSelector(selectToken);
 
   useEffect(() => {
     const getDetails = async (id) => {
@@ -40,27 +44,10 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   const handleAddToWatchLater = () => {
-    if (!user) {
-      console.error('User is not logged in');
-      return;
-    }
-
-    if (!movieId) {
-      console.error('Movie ID is missing');
-      return;
-    }
-
     const movieData = {
       id: movieId,
-      backdrop_path: details.backdrop_path,
-      genres: details.genres ? details.genres.map((genre) => genre.name) : [],
-      overview: details.overview,
-      poster_path: details.poster_path,
-      release_date: details.release_date,
-      tagline: details.tagline,
       title: details.title,
-      vote_average: details.vote_average,
-      uid: user.uid
+      uid: uid
     };
 
     addToWatchLater(movieData, user.uid);
