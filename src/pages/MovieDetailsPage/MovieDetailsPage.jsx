@@ -4,7 +4,7 @@ import { getMovieDetails } from '../../getMovies/getMovies';
 import { useEffect, useState } from 'react';
 import styles from './MovieDetailsPage.module.css';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import Loader from '../../components/Loader/Loader';
 import BackButton from '../../components/BackButton/BackButton';
 import { addToWatchLater, auth } from '../../firebase/firebase';
@@ -135,7 +135,6 @@ const MovieDetailsPage = () => {
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
-        <Toaster />
       </div>
     </div>
   );

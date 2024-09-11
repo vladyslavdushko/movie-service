@@ -4,7 +4,6 @@ import styles from './Movies.module.css';
 import MovieList from '../../components/MovieList/MovieList';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import { Toaster } from 'react-hot-toast';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -33,7 +32,6 @@ const HomePage = () => {
         {loading && <Loader className={styles.loader} />}
         {error && <ErrorMessage error={error} />}
         <MovieList results={movies} />
-        <Toaster />
       </div>
     </>
   );

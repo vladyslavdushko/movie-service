@@ -1,5 +1,5 @@
 import style from './MoviesPage.module.css';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { searchMovie } from '../../getMovies/getMovies';
 import { useSearchParams } from 'react-router-dom';
@@ -79,7 +79,6 @@ const MoviesPage = () => {
           {loader ? 'Loading...' : 'Load more'}
         </LoadMoreBtn>
       )}
-      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };
