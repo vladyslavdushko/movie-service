@@ -19,80 +19,78 @@ const NavBar = () => {
   };
 
   return (
-    <div>
-      <nav className={styles.nav_container}>
-        <div className={styles.burger_menu_container}>
-          <RiMenu2Fill className={styles.burger_menu_item} onClick={handleBurgerMenu} />
-        </div>
-        <ul className={styles.inner_container}>
-          <li>
+    <nav className={styles.nav_container}>
+      <div className={styles.burger_menu_container}>
+        <RiMenu2Fill className={styles.burger_menu_item} onClick={handleBurgerMenu} />
+      </div>
+      <ul className={styles.inner_container}>
+        <li>
+          <NavLink
+            to="/"
+            className={({ isActive }) => {
+              return clsx(styles.link, isActive && 'isActive');
+            }}>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/movies"
+            className={({ isActive }) => {
+              return clsx(styles.link, isActive && 'isActive');
+            }}>
+            Movies
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="watch-later"
+            className={({ isActive }) => {
+              return clsx(styles.link, isActive && 'isActive');
+            }}>
+            Watchlist
+          </NavLink>
+        </li>
+      </ul>
+
+      <ul className={clsx(styles.nav_mobile_container, isOpen ? styles.open : styles.closed)}>
+        <IoClose className={styles.close_button} onClick={handleBurgerMenu} />
+
+        <ul className={styles.inner_mobile_menu_container}>
+          <li className={styles.nav_mobile_menu_item} onClick={handleBurgerMenu}>
             <NavLink
               to="/"
               className={({ isActive }) => {
-                return clsx(styles.link, isActive && 'isActive');
+                return clsx(styles.mobile_link, isActive && 'isActive');
               }}>
               Home
             </NavLink>
           </li>
-          <li>
+          <li onClick={handleBurgerMenu}>
             <NavLink
               to="/movies"
               className={({ isActive }) => {
-                return clsx(styles.link, isActive && 'isActive');
+                return clsx(styles.mobile_link, isActive && 'isActive');
               }}>
               Movies
             </NavLink>
           </li>
-          <li>
+          <li onClick={handleBurgerMenu}>
             <NavLink
               to="watch-later"
               className={({ isActive }) => {
-                return clsx(styles.link, isActive && 'isActive');
+                return clsx(styles.mobile_link, isActive && 'isActive');
               }}>
               Watchlist
             </NavLink>
           </li>
+          <li>
+            <SignOutButton />
+          </li>
         </ul>
-
-        <ul className={clsx(styles.nav_mobile_container, isOpen ? styles.open : styles.closed)}>
-          <IoClose className={styles.close_button} onClick={handleBurgerMenu} />
-
-          <ul className={styles.inner_mobile_menu_container}>
-            <li className={styles.nav_mobile_menu_item} onClick={handleBurgerMenu}>
-              <NavLink
-                to="/"
-                className={({ isActive }) => {
-                  return clsx(styles.mobile_link, isActive && 'isActive');
-                }}>
-                Home
-              </NavLink>
-            </li>
-            <li onClick={handleBurgerMenu}>
-              <NavLink
-                to="/movies"
-                className={({ isActive }) => {
-                  return clsx(styles.mobile_link, isActive && 'isActive');
-                }}>
-                Movies
-              </NavLink>
-            </li>
-            <li onClick={handleBurgerMenu}>
-              <NavLink
-                to="watch-later"
-                className={({ isActive }) => {
-                  return clsx(styles.mobile_link, isActive && 'isActive');
-                }}>
-                Watchlist
-              </NavLink>
-            </li>
-            <li>
-              <SignOutButton />
-            </li>
-          </ul>
-        </ul>
-        <div className={styles.login_container}>{isLoggedIn ? <UserMenu /> : <AuthNav />}</div>
-      </nav>
-    </div>
+      </ul>
+      <div className={styles.login_container}>{isLoggedIn ? <UserMenu /> : <AuthNav />}</div>
+    </nav>
   );
 };
 

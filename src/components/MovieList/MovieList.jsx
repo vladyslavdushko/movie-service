@@ -10,14 +10,14 @@ const MovieList = ({ results }) => {
   const location = useLocation();
   const uid = useSelector(selectToken);
   const isLoggedIn = useSelector(selectIsLoggedInFire);
-  const handleAddMovie = async (movieId, title, poster) => {
+  const handleAddMovie = async (movieId, title, poster_path) => {
     if (!isLoggedIn) {
       toast.error('Please login');
     }
     const movieData = {
       id: movieId,
       title: title,
-      poster: poster,
+      poster_path: poster_path,
       uid: uid
     };
     try {

@@ -18,8 +18,10 @@ const WatchLaterPage = () => {
     const fetchWatchLaterMovies = async () => {
       const movies = await getWatchLaterMovies(uid);
       setMovies(movies);
-      setLoading(false);
+      setLoading(false)
     };
+
+
 
     fetchWatchLaterMovies();
   }, [uid]);
@@ -56,7 +58,7 @@ const WatchLaterPage = () => {
               <Link to={`/movies/${movie.id}`} state={location}>
                 <div className={style.item_container}>
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster}`}
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     alt={movie.title}
                     className={style.movi_poster}
                   />
