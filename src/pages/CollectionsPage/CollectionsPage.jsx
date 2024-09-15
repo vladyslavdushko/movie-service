@@ -1,11 +1,7 @@
 import UserCollections from '../../components/UserCollections/UserCollections';
 
 const CollectionsPage = () => {
-  return (
-    <>
-      <UserCollections />
-    </>
-  );
+  return <UserCollections />;
 };
 
 export default CollectionsPage;

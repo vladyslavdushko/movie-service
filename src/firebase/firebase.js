@@ -42,13 +42,23 @@ export const addToWatchLater = async (movieData, userId) => {
   }
 };
 
-export const removeFromWatchLater = async (movieId, userId) => {
+export const removeFromCollection = async (movieId, userId, collectionName) => {
   try {
-    const movieDocRef = doc(db, 'watchLater', userId, 'movies', movieId.toString());
+    const movieDocRef = doc(
+      db,
+      'users',
+      userId.toString(),
+      'collections',
+      collectionName.toString(),
+      'movies',
+      movieId.toString()
+    );
 
     await deleteDoc(movieDocRef);
+    console.log(`Movie ${movieId} successfully removed from collection ${collectionName}`);
     return;
   } catch (error) {
+    console.error('Error removing movie:', error.message);
     throw error.message;
   }
 };
@@ -93,10 +103,6 @@ export const createCollection = async (collectionName, userId) => {
 };
 
 export const addToCollection = async (userId, collectionName, movieData) => {
-  console.log(userId);
-  console.log(collectionName);
-  console.log(movieData);
-
   try {
     const movieDocRef = doc(
       db,

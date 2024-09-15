@@ -7,7 +7,7 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import toast from 'react-hot-toast';
 import Loader from '../../components/Loader/Loader';
 import BackButton from '../../components/BackButton/BackButton';
-import { addToWatchLater, auth } from '../../firebase/firebase';
+import { addToCollection, auth } from '../../firebase/firebase';
 import AddToWatchListBtn from '../../components/AddToWatchListBtn/AddToWatchListBtn';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux/firebaseAuth/selectors';
@@ -47,10 +47,11 @@ const MovieDetailsPage = () => {
     const movieData = {
       id: movieId,
       title: details.title,
-      uid: uid
+      uid: uid,
+      poster_path: details.poster_path
     };
 
-    addToWatchLater(movieData, user.uid);
+    addToCollection(user.uid, 'watchLater', movieData);
     toast.success('Movie added to watchlist');
   };
 

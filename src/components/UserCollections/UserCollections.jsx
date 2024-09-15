@@ -10,6 +10,7 @@ const UserCollections = () => {
   const [userCollection, setUserCollection] = useState([]);
   const [collectionName, setCollectionName] = useState('');
   const location = useLocation();
+
   useEffect(() => {
     const getCollectionsFromStore = async () => {
       try {
@@ -47,16 +48,20 @@ const UserCollections = () => {
 
   return (
     <>
-      <form onSubmit={handleCreateCollection} className="collection-form">
-        <label htmlFor="collectionName">Enter Collection Name:</label>
-        <input
-          type="text"
-          id="collectionName"
-          value={collectionName}
-          onChange={(e) => setCollectionName(e.target.value)}
-          placeholder="Enter collection name"
-        />
-        <button type="submit">Create Collection</button>
+      <form onSubmit={handleCreateCollection} className={styles['collection-form']}>
+        <>
+          <label htmlFor="collectionName">Enter Collection Name:</label>
+          <input
+            type="text"
+            id="collectionName"
+            value={collectionName}
+            onChange={(e) => setCollectionName(e.target.value)}
+            placeholder="Enter collection name"
+          />
+        </>
+        <button type="submit" className={styles.submit_button}>
+          Create Collection
+        </button>
       </form>
 
       <ul className={styles.collections_ul}>

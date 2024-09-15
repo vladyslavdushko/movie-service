@@ -32,7 +32,6 @@ const RegisterForm = () => {
       password: values.password
     };
     dispatch(createUser(userData));
-    // createUser(userData.email, userData.password);
     actions.resetForm();
   };
 

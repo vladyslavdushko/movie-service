@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getWatchLaterMovies, removeFromWatchLater } from '../../firebase/firebase';
+import { getMoviesFromCollection, removeFromCollection } from '../../firebase/firebase';
 import style from './WatchLaterPage.module.css';
 import { Link, useLocation } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
@@ -12,11 +12,13 @@ const WatchLaterPage = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+
   const uid = useSelector(selectToken);
+  const collectionName = location.pathname.substring(1);
 
   useEffect(() => {
     const fetchWatchLaterMovies = async () => {
-      const movies = await getWatchLaterMovies(uid);
+      const movies = await getMoviesFromCollection(uid, 'watchLater');
       setMovies(movies);
       setLoading(false);
     };
@@ -26,7 +28,7 @@ const WatchLaterPage = () => {
 
   const handleRemoveMovie = async (movieId) => {
     try {
-      await removeFromWatchLater(movieId, uid);
+      await removeFromCollection(movieId, uid, collectionName);
       setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== movieId));
       toast.success('Movie removed from watchlist');
     } catch (error) {

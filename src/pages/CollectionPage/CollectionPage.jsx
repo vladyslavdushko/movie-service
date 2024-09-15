@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux/firebaseAuth/selectors';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { getMoviesFromCollection, removeFromWatchLater } from '../../firebase/firebase';
+import { getMoviesFromCollection, removeFromCollection } from '../../firebase/firebase';
 import style from './CollectionPage.module.css';
 import BackButton from '../../components/BackButton/BackButton';
 import { FaMinusCircle } from 'react-icons/fa';
@@ -39,7 +39,7 @@ const CollectionPage = () => {
 
   const handleRemoveMovie = async (movieId) => {
     try {
-      await removeFromWatchLater(movieId, uid);
+      await removeFromCollection(movieId, uid, collectionId);
       setMovies((prevMovies) => prevMovies.filter((movie) => movie.id !== movieId));
       toast.success('Movie removed from watchlist');
     } catch (error) {
