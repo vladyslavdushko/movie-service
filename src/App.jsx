@@ -8,6 +8,8 @@ import PrivateRoute from './routes/PrivateRoute';
 import { useDispatch } from 'react-redux';
 import { getMe } from './redux/firebaseAuth/operations';
 import WatchLaterPage from './pages/WatchLaterPage/WatchLaterPage';
+import CollectionsPage from './pages/CollectionsPage/CollectionsPage';
+import CollectionPage from './pages/CollectionPage/CollectionPage';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
@@ -57,7 +59,23 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="user-lists"
+              element={
+                <PrivateRoute>
+                  <CollectionsPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/user-lists/:collectionId"
+              element={
+                <PrivateRoute>
+                  <CollectionPage />
+                </PrivateRoute>
+              }></Route>
           </Route>
+
           <Route
             path="register"
             element={

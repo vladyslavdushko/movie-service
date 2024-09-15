@@ -18,10 +18,8 @@ const WatchLaterPage = () => {
     const fetchWatchLaterMovies = async () => {
       const movies = await getWatchLaterMovies(uid);
       setMovies(movies);
-      setLoading(false)
+      setLoading(false);
     };
-
-
 
     fetchWatchLaterMovies();
   }, [uid]);
@@ -37,7 +35,6 @@ const WatchLaterPage = () => {
 
     return;
   };
-  console.log(movies, 'movies');
 
   return (
     <>

@@ -51,6 +51,15 @@ const NavBar = () => {
             Watchlist
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to="user-lists"
+            className={({ isActive }) => {
+              return clsx(styles.link, isActive && 'isActive');
+            }}>
+            Lists
+          </NavLink>
+        </li>
       </ul>
 
       <ul className={clsx(styles.nav_mobile_container, isOpen ? styles.open : styles.closed)}>
@@ -82,6 +91,15 @@ const NavBar = () => {
                 return clsx(styles.mobile_link, isActive && 'isActive');
               }}>
               Watchlist
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="user-lists"
+              className={({ isActive }) => {
+                return clsx(styles.mobile_link, isActive && 'isActive');
+              }}>
+              Lists
             </NavLink>
           </li>
           <li>
